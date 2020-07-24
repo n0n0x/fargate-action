@@ -1,0 +1,28 @@
+name: "AWS Fargate Action for Github Actions"
+description: "Deploys a new image to a Fargate Service"
+inputs:
+    regions:
+      description: "one region or semicolon separated list of regions"
+      required: true
+      default: "us-east-1"
+    service:
+      description: "fargate service name"
+      required: true
+      default: "web"
+    cluster:
+      description: "fargate cluster name"
+      required: true
+      default: "fargate"
+    image:
+      description: "image name to deploy"
+      required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.regions }}
+    - ${{ inputs.service }}
+    - ${{ inputs.cluster }}
+    - ${{ inputs.image }}
+
